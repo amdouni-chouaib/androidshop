@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "248339792679",
+    "project_id": "azshop-8eb95",
+    "storage_bucket": "azshop-8eb95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248339792679:android:04daf2512852590bbf9f02",
+        "android_client_info": {
+          "package_name": "com.example.azshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248339792679-22h5uo4t1qeo78vguukk28ga1mafr2m9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXrQNlths0dwP5_z6BnDjl3vNIo9FqKq4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248339792679-22h5uo4t1qeo78vguukk28ga1mafr2m9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
