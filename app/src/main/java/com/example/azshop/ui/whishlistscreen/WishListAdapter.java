@@ -1,6 +1,7 @@
 package com.example.azshop.ui.whishlistscreen;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.azshop.R;
 import com.example.azshop.data.model.CartArticleDataModel;
+import com.example.azshop.ui.detailsscreen.DetailsActivity;
 
 import java.util.List;
 
@@ -42,6 +44,20 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
         holder.itemTitle.setText(myItem.title);
         holder.itemPrice.setText(String.valueOf(myItem.price));
         Glide.with(context).load(myItem.imagPath).into(holder.itemImage);
+        holder.item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailsActivity.class);
+                intent.putExtra("id",  myItem.id);
+                intent.putExtra("title",  myItem.title);
+                intent.putExtra("description",  myItem.description);
+                intent.putExtra("gender",  myItem.gender);
+                intent.putExtra("price",  myItem.price.toString());
+                intent.putExtra("image",  myItem.imagPath);
+                intent.putExtra("type",  myItem.type);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -57,12 +73,14 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
         ImageView itemImage;
         TextView itemTitle;
         TextView itemPrice;
+        View item;
 
         ViewHolder(View itemView) {
             super(itemView);
             itemTitle = itemView.findViewById(R.id.tv_item_name);
             itemPrice = itemView.findViewById(R.id.tv_item_price);
             itemImage = itemView.findViewById(R.id.img_article);
+            item = itemView;
 
         }
 

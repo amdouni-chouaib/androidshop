@@ -48,7 +48,7 @@ public class HomeClothesAdapter extends ArrayAdapter<ArticleDataModel> {
         ImageView imgArticle = listitemView.findViewById(R.id.img_article);
         if (articleDataModel != null) {
             articlename.setText(articleDataModel.getTitle());
-            articleprice.setText(articleDataModel.getPrice().toString());
+            articleprice.setText(articleDataModel.getPrice().toString() + "$");
             Glide.with(context).load(articleDataModel.getImagPath()).into(imgArticle);
         }
         listitemView.setOnClickListener(new View.OnClickListener() {

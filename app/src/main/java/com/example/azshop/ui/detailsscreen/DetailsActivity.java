@@ -67,7 +67,7 @@ public class DetailsActivity extends AppCompatActivity {
         });
 
         ((TextView) findViewById(R.id.item_name)).setText(title);
-        ((TextView) findViewById(R.id.item_price)).setText(price);
+        ((TextView) findViewById(R.id.item_price)).setText(price+"$");
         Glide.with(this).load(imagPath).into(imgArticle);
 
         SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);

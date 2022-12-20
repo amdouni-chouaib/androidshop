@@ -55,7 +55,9 @@
         android:horizontalSpacing="6dp"
         android:numColumns="2"
         android:verticalSpacing="6dp"
+        android:gravity="center"
+        tools:listitem="@layout/item_clothe"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guidelineappbar" />
-    />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
