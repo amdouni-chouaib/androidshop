@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/home" />
+        app:srcCompat="@drawable/home" />
 
     <TextView
         android:id="@+id/textView"

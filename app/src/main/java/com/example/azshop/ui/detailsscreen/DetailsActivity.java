@@ -93,7 +93,7 @@ public class DetailsActivity extends AppCompatActivity {
 
                     );
                     databaseReferenceCart.child(id).setValue(cartarticleDateModel);
-
+                Toast.makeText(getApplicationContext(),"Product Added To Basket",Toast.LENGTH_LONG).show();
                 }
             });
 

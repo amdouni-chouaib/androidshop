@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -73,6 +74,7 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
         ImageView itemImage;
         TextView itemTitle;
         TextView itemPrice;
+        Button btn;
         View item;
 
         ViewHolder(View itemView) {

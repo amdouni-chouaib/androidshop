@@ -2,15 +2,18 @@ package com.example.azshop.ui.bashetscreen;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +36,7 @@ public class BasketFragment extends Fragment {
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+    private Button btn;
     private ArrayList<CartArticleDataModel> articleDataModel = new ArrayList<CartArticleDataModel>();
     private RecyclerView rv_fav;
     private float totalitemprice=0;
@@ -54,9 +58,27 @@ public class BasketFragment extends Fragment {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Azshop").child("Cart");
-
+        btn = view.findViewById(R.id.btn_checkout);
         rv_fav = view.findViewById(R.id.rv_cart);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                builder1.setTitle("Thanks For The Trust");
+                builder1.setMessage("Your Product will be delivered in 48h You can pay there");
+                builder1.setCancelable(true);
 
+                builder1.setPositiveButton(
+                        "Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
+        });
         WishListAdapter wishListAdapter = new WishListAdapter(requireContext(), articleDataModel);
 
         SharedPreferences sh =  this.getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
