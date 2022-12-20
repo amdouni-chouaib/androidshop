@@ -55,6 +55,11 @@
     <string name="check_if_there_are_any_products_on_your_wishlist_and_snatch_them_up_before_they_re_gone">Check if there are any products on your wishlist and snatch them up before they’re gone!</string>
     <string name="you_can_also_check_out_the_latest_arrivals">You can also check out the latest arrivals</string>
     <string name="logout">LogOut</string>
+    <string name="total">Total:</string>
+    <string name="tax">Tax:</string>
+    <string name="delivery_services">Delivery Services:</string>
+    <string name="item_total">Item Total:</string>
+    <string name="checkout">CHECKOUT</string>
     <!-- Strings used for fragments for navigation -->
 
 </resources>

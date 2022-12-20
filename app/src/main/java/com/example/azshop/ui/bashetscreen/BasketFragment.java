@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +35,8 @@ public class BasketFragment extends Fragment {
     private DatabaseReference databaseReference;
     private ArrayList<CartArticleDataModel> articleDataModel = new ArrayList<CartArticleDataModel>();
     private RecyclerView rv_fav;
+    private float totalitemprice=0;
+    private float totalprice=0;
 
     public BasketFragment() {
         // Required empty public constructor
@@ -64,12 +67,16 @@ public class BasketFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     CartArticleDataModel articleDataModelitem = postSnapshot.getValue(CartArticleDataModel.class);
+                    totalitemprice += articleDataModelitem.price;
                     articleDataModel.add(articleDataModelitem);
                 }
+                totalprice = totalitemprice+4;
 
                 if (articleDataModel.size() != 0) {
                     view.findViewById(R.id.cl_nodata).setVisibility(View.GONE);
-                    rv_fav.setVisibility(View.VISIBLE);
+                    view.findViewById(R.id.cl_data).setVisibility(View.VISIBLE);
+                    ((TextView)view.findViewById(R.id.tv_total)).setText(totalitemprice + "$");
+                    ((TextView)view.findViewById(R.id.tv_Totalsum)).setText(totalprice + "$");
                     wishListAdapter.notifyDataSetChanged();
                     rv_fav.setAdapter(wishListAdapter);
                     rv_fav.setLayoutManager(new LinearLayoutManager(getActivity(),  LinearLayoutManager.VERTICAL, false));
