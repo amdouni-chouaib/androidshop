@@ -18,12 +18,12 @@ import androidx.fragment.app.Fragment;
 import com.example.azshop.R;
 import com.example.azshop.data.model.Articlemodel.ArticleDataModel;
 import com.example.azshop.ui.authscreens.UserProfileActivity;
+import com.example.azshop.ui.authscreens.WelcomeScreen;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -90,13 +90,20 @@ public class HomeFragment extends Fragment {
 
         imgUser = view.findViewById(R.id.img_user);
         SharedPreferences sh =  this.getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
-       if(sh.getString("userId", "").equals(""))
-        imgUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(requireContext(), UserProfileActivity.class));
-            }
-        });
+        if (sh.getString("userId", "").equals("")) {
+            imgUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(requireContext(), WelcomeScreen.class));
+                }
+            });
+        } else
+            imgUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(requireContext(), UserProfileActivity.class));
+                }
+            });
     }
 
 
