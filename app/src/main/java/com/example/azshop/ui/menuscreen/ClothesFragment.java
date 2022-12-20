@@ -54,7 +54,7 @@ public class ClothesFragment extends Fragment {
 
         rv_clothes = view.findViewById(R.id.rv_clothes);
         tvtype = view.findViewById(R.id.tv_type);
-        tvtype.setText(gender);
+        tvtype.setText(type);
 
         view.findViewById(R.id.img_back).setOnClickListener(new View.OnClickListener() {
             @Override

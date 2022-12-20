@@ -1,6 +1,9 @@
 package com.example.azshop.ui.homescreen;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,6 +89,8 @@ public class HomeFragment extends Fragment {
 
 
         imgUser = view.findViewById(R.id.img_user);
+        SharedPreferences sh =  this.getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
+       if(sh.getString("userId", "").equals(""))
         imgUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

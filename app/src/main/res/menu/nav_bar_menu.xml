@@ -5,26 +5,31 @@
         android:id="@+id/home"
         android:enabled="true"
         android:icon="@drawable/ic_home"
+        android:menuCategory="secondary"
         android:title="@string/home"/>
     <item
         android:id="@+id/search"
         android:enabled="true"
         android:icon="@drawable/ic_search"
         app:iconTint="@color/white"
+        android:menuCategory="secondary"
         android:title="@string/search"/>
     <item
         android:id="@+id/menu"
         android:enabled="true"
+        android:menuCategory="secondary"
         android:icon="@drawable/ic_menu"
         android:title="@string/menu"/>
     <item
         android:id="@+id/favoris"
         android:enabled="true"
+        android:menuCategory="secondary"
         android:icon="@drawable/ic_favorite"
         android:title="@string/favoris"/>
     <item
         android:id="@+id/basket"
         android:enabled="true"
+        android:menuCategory="secondary"
         android:icon="@drawable/ic_shopping_cart"
         android:title="@string/basket" />
 </menu>

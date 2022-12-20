@@ -32,12 +32,6 @@ public class MenuFragment extends Fragment {
     }
 
 
-    public static MenuFragment newInstance(String param1, String param2) {
-        MenuFragment fragment = new MenuFragment();
-        return fragment;
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,7 +45,7 @@ public class MenuFragment extends Fragment {
 
         addWomenCatheg();
         menuAdapter = new MenuAdapter(requireContext(), arrayListmenudata);
-        menuAdapter.setGender("Man");
+        menuAdapter.setGender("Woman");
         rv_cclothes = view.findViewById(R.id.rv_clothes);
         rv_cclothes.setAdapter(menuAdapter);
         rv_cclothes.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -61,7 +55,7 @@ public class MenuFragment extends Fragment {
             @SuppressLint({"ResourceAsColor", "NotifyDataSetChanged"})
             @Override
             public void onClick(View v) {
-                tv_woman.setTextColor(R.color.black);
+                tv_woman.setTextColor(getResources().getColor(R.color.black));
                 tv_man.setTextColor(getResources().getColor(R.color.white));
                 menuAdapter.setGender("Woman");
                 addWomenCatheg();
@@ -73,7 +67,7 @@ public class MenuFragment extends Fragment {
             @SuppressLint({"ResourceAsColor", "NotifyDataSetChanged"})
             @Override
             public void onClick(View v) {
-                tv_man.setTextColor(R.color.black);
+                tv_man.setTextColor(getResources().getColor(R.color.black));
                 tv_woman.setTextColor(getResources().getColor(R.color.white));
                 menuAdapter.setGender("Man");
                 addManCatheg();
@@ -92,7 +86,7 @@ public class MenuFragment extends Fragment {
     private void addManCatheg(){
         arrayListmenudata.clear();
         arrayListmenudata.add(new MenuDataModel("Clothes", R.drawable.img_cloth));
-        arrayListmenudata.add(new MenuDataModel("shoes", R.drawable.img_cloth));
+        arrayListmenudata.add(new MenuDataModel("Shoes", R.drawable.img_cloth));
         arrayListmenudata.add(new MenuDataModel("Accessories", R.drawable.img_cloth));
     }
 }

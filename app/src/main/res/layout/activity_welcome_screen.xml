@@ -81,13 +81,27 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/log_in"
                 android:textAllCaps="false"
                 android:textStyle="italic"
                 app:backgroundTint="@color/darkgray"
                 app:layout_constraintEnd_toEndOf="@+id/guidelinecbutton"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <Button
+                android:id="@+id/btn_guest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="Guest"
+                android:textAllCaps="false"
+                android:textStyle="italic"
+                android:layout_marginTop="10dp"
+                app:backgroundTint="@color/darkgray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelinecbutton"
@@ -101,7 +115,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/sign_up"
                 android:textAllCaps="false"
                 android:textStyle="italic"

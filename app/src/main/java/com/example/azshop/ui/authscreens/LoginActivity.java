@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                             myEdit.putString("userId", user.getUid());
+                            myEdit.commit();
 
                         }
                         else{
