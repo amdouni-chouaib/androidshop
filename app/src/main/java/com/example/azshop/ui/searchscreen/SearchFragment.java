@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.azshop.R;
 import com.example.azshop.data.model.Articlemodel.ArticleDataModel;
 import com.example.azshop.ui.menuscreen.ClotheAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +34,7 @@ public class SearchFragment extends Fragment {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private RecyclerView rvs_clothes;
-    private ArrayList<ArticleDataModel> articleDataModel = new ArrayList<>();
+    private ArrayList<ArticleDataModel> articleDataModel = new ArrayList<ArticleDataModel>();
     private TextInputLayout tisearch;
 
     public SearchFragment() {
@@ -73,7 +74,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String search =((TextView) view.findViewById(R.id.et_search)).getText().toString();
-                Query query = databaseReference.child("title").startAt(search);
+                Query query = databaseReference.child("title").equalTo(search).startAt(search);
 
 
                 query.addValueEventListener(new ValueEventListener() {
@@ -83,20 +84,19 @@ public class SearchFragment extends Fragment {
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             ArticleDataModel articleDataModelitem = postSnapshot.getValue(ArticleDataModel.class);
                             articleDataModel.add(articleDataModelitem);
-
                             // here you can access to name property like university.name
-
 
                         }
                          if (articleDataModel.size() != 0) {
-                             Toast.makeText(getContext(), articleDataModel.size()+"", Toast.LENGTH_SHORT).show();
+                             Toast.makeText(getContext(), articleDataModel.size()+"!!", Toast.LENGTH_SHORT).show();
 
                         ClotheAdapter wishListAdapter = new ClotheAdapter(getContext(), articleDataModel);
 
                         rvs_clothes.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
 
-                        rvs_clothes.setAdapter(wishListAdapter);
+
+                             rvs_clothes.setAdapter(wishListAdapter);
 
 
                         }else{

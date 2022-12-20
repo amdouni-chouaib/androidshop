@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "248339792679",
-    "project_id": "azshop-8eb95",
-    "storage_bucket": "azshop-8eb95.appspot.com"
+    "project_number": "520067512385",
+    "firebase_url": "https://azshop-bda02-default-rtdb.firebaseio.com",
+    "project_id": "azshop-bda02",
+    "storage_bucket": "azshop-bda02.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:248339792679:android:04daf2512852590bbf9f02",
+        "mobilesdk_app_id": "1:520067512385:android:0e902c9d366baeee4e6ec0",
         "android_client_info": {
           "package_name": "com.example.azshop"
         }
       },
       "oauth_client": [
         {
-          "client_id": "248339792679-22h5uo4t1qeo78vguukk28ga1mafr2m9.apps.googleusercontent.com",
+          "client_id": "520067512385-io078qqjum81i4npahqp27lq31tdckdh.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBXrQNlths0dwP5_z6BnDjl3vNIo9FqKq4"
+          "current_key": "AIzaSyAcNG5Kq2n1LFkFPRJ9Q7SH-F1Ou0ovepA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "248339792679-22h5uo4t1qeo78vguukk28ga1mafr2m9.apps.googleusercontent.com",
+              "client_id": "520067512385-io078qqjum81i4npahqp27lq31tdckdh.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

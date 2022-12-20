@@ -79,14 +79,14 @@ public class MenuFragment extends Fragment {
     private void addWomenCatheg(){
         arrayListmenudata.clear();
         arrayListmenudata.add(new MenuDataModel("Clothes", R.drawable.img_cloth));
-        arrayListmenudata.add(new MenuDataModel("Shoes", R.drawable.img_cloth));
-        arrayListmenudata.add(new MenuDataModel("Bags", R.drawable.img_cloth));
-        arrayListmenudata.add(new MenuDataModel("Accessories", R.drawable.img_cloth));
+        arrayListmenudata.add(new MenuDataModel("Shoes", R.drawable.womenshoes));
+        arrayListmenudata.add(new MenuDataModel("Bags", R.drawable.bag));
+        arrayListmenudata.add(new MenuDataModel("Accessories", R.drawable.accwomen));
     }
     private void addManCatheg(){
         arrayListmenudata.clear();
-        arrayListmenudata.add(new MenuDataModel("Clothes", R.drawable.img_cloth));
-        arrayListmenudata.add(new MenuDataModel("Shoes", R.drawable.img_cloth));
-        arrayListmenudata.add(new MenuDataModel("Accessories", R.drawable.img_cloth));
+        arrayListmenudata.add(new MenuDataModel("Clothes", R.drawable.clothes));
+        arrayListmenudata.add(new MenuDataModel("Shoes", R.drawable.shoesman));
+        arrayListmenudata.add(new MenuDataModel("Accessories", R.drawable.accman));
     }
 }
