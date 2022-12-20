@@ -1,6 +1,7 @@
 package com.example.azshop.ui.authscreens;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
 
         etemail = findViewById(R.id.et_mail);
 
@@ -52,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            myEdit.putString("userId", user.getUid());
 
                         }
                         else{

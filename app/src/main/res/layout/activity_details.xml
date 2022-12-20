@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="@string/shoppy"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/guidelineappbar"
         app:layout_constraintEnd_toEndOf="parent"

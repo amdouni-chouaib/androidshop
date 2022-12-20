@@ -13,9 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.azshop.MainActivity;
 import com.example.azshop.R;
-import com.example.azshop.data.model.Articlemodel.ArticleDataModel;
 import com.example.azshop.data.model.userModel;
-import com.example.azshop.ui.sellscreen.SellActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,8 +21,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Calendar;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -92,18 +88,17 @@ public class SignUpActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 updateUI(user);
-                                String id = databaseReference.push().getKey();
-                                myEdit.putString("userId", id);
+                                myEdit.putString("userId", user.getUid());
                                 myEdit.commit();
                                 userModel userModel = new userModel(
-                                        id,
+                                        user.getUid(),
                                         fname,
                                         lname,
                                         email,
                                         phone
 
                                 );
-                                databaseReference.child(id).setValue(userModel);
+                                databaseReference.child(user.getUid()).setValue(userModel);
                                 Toast.makeText(SignUpActivity.this, "success add user", Toast.LENGTH_LONG).show();
 
 
@@ -127,7 +122,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+        if (user != null)
+            startActivity(new Intent(SignUpActivity.this, MainActivity.class));
 
     }
 }
