@@ -41,7 +41,7 @@ public class SellActivity extends AppCompatActivity {
     private EditText ettype;
     private EditText etprice;
     private ImageView imgItem;
-    private Button btnConfirm;
+    private Button btnConfirm,btnCancel;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private Uri mImageUri = null;
@@ -65,8 +65,17 @@ public class SellActivity extends AppCompatActivity {
         etprice = findViewById(R.id.et_price);
         btnConfirm = findViewById(R.id.btn_confirm);
         imgItem = findViewById(R.id.img_article_details);
+        btnCancel = findViewById(R.id.btn_cancel);
 
-
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ettitle.setText("");
+                    etprice.setText("");
+                    etdescription.setText("");
+                    imgItem.setImageURI(Uri.parse(""));
+                }
+            });
         itemsList.add("Clothes");
         itemsList.add("Shoes");
         itemsList.add("Bags");
@@ -115,45 +124,51 @@ public class SellActivity extends AppCompatActivity {
                         .crop().start();
             }
         });
-        btnConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String id = databaseReference.push().getKey();
-                StorageReference filepath = mStorage.child("Blog_Images").child(mImageUri.getLastPathSegment());
-                filepath.putFile(mImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
-                        }
 
-                        // Continue with the task to get the download URL
-                        return filepath.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-                            Uri downloadUri = task.getResult();
-                            articleDataModel = new ArticleDataModel(
-                                    id,
-                                    downloadUri.toString(),
-                                    ettitle.getText().toString(),
-                                    etdescription.getText().toString(),
-                                    type,
-                                    Float.parseFloat(etprice.getText().toString()),
-                                    gender,
-                                    Calendar.getInstance().getTime().toString(),
-                                    sh.getString("userId", "")
-                            );
-                            databaseReference.child(id).setValue(articleDataModel);
-                            Toast.makeText(SellActivity.this, "Article added successfully ", Toast.LENGTH_LONG).show();
+            btnConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    String id = databaseReference.push().getKey();
+                    StorageReference filepath = mStorage.child("Blog_Images").child(mImageUri.getLastPathSegment());
+                    filepath.putFile(mImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            if (!task.isSuccessful()) {
+                                throw task.getException();
+                            }
+
+                            // Continue with the task to get the download URL
+                            return filepath.getDownloadUrl();
                         }
-                    }
-                });
-            }
-        });
-    }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()) {
+                                Uri downloadUri = task.getResult();
+                                articleDataModel = new ArticleDataModel(
+                                        id,
+                                        downloadUri.toString(),
+                                        ettitle.getText().toString(),
+                                        etdescription.getText().toString(),
+                                        type,
+                                        Float.parseFloat(etprice.getText().toString()),
+                                        gender,
+                                        Calendar.getInstance().getTime().toString(),
+                                        sh.getString("userId", "")
+                                );
+                                databaseReference.child(id).setValue(articleDataModel);
+                                Toast.makeText(SellActivity.this, "Article added successfully ", Toast.LENGTH_LONG).show();
+
+
+                                }
+                        }
+                    });
+                }
+            });
+        }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

@@ -114,6 +114,8 @@
                     android:id="@+id/et_psw1"
                     android:layout_width="match_parent"
                     android:textColor="@color/white"
+                    android:inputType="textPassword"
+
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 

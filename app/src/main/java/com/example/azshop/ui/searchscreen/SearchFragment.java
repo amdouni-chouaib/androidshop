@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,13 +26,14 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class SearchFragment extends Fragment {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
-    private RecyclerView rv_clothes;
-    private ArrayList<ArticleDataModel> articleDataModel = new ArrayList<ArticleDataModel>();
+    private RecyclerView rvs_clothes;
+    private ArrayList<ArticleDataModel> articleDataModel = new ArrayList<>();
     private TextInputLayout tisearch;
 
     public SearchFragment() {
@@ -41,7 +44,10 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
+
     }
+
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -53,10 +59,11 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 getFragmentManager().popBackStack();
 
+
             }
         });
 
-        rv_clothes = view.findViewById(R.id.rv_clothes);
+        rvs_clothes = view.findViewById(R.id.rv_clothes);
         tisearch = view.findViewById(R.id.ti_search);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -65,7 +72,8 @@ public class SearchFragment extends Fragment {
         tisearch.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Query query = databaseReference.child("title").startAt(((TextView) view.findViewById(R.id.et_search)).getText().toString());
+                String search =((TextView) view.findViewById(R.id.et_search)).getText().toString();
+                Query query = databaseReference.child("title").startAt(search);
 
 
                 query.addValueEventListener(new ValueEventListener() {
@@ -78,12 +86,25 @@ public class SearchFragment extends Fragment {
 
                             // here you can access to name property like university.name
 
+
                         }
-                        if (articleDataModel.size() != 0) {
-                            ClotheAdapter wishListAdapter = new ClotheAdapter(getContext(), articleDataModel);
-                            rv_clothes.setAdapter(wishListAdapter);
-                            rv_clothes.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-                        }
+                         if (articleDataModel.size() != 0) {
+                             Toast.makeText(getContext(), articleDataModel.size()+"", Toast.LENGTH_SHORT).show();
+
+                        ClotheAdapter wishListAdapter = new ClotheAdapter(getContext(), articleDataModel);
+
+                        rvs_clothes.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+
+
+                        rvs_clothes.setAdapter(wishListAdapter);
+
+
+                        }else{
+                             Toast.makeText(getContext(), "no Data", Toast.LENGTH_SHORT).show();
+                         }
+
+
+
                     }
 
 
@@ -94,7 +115,6 @@ public class SearchFragment extends Fragment {
                 });
             }
         });
-
 
     }
 }
