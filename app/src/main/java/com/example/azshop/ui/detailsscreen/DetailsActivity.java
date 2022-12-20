@@ -67,55 +67,56 @@ public class DetailsActivity extends AppCompatActivity {
         });
 
         ((TextView) findViewById(R.id.item_name)).setText(title);
-        ((TextView) findViewById(R.id.item_price)).setText(price+"$");
+        ((TextView) findViewById(R.id.item_price)).setText(price + "$");
         Glide.with(this).load(imagPath).into(imgArticle);
 
         SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
 
-        findViewById(R.id.btn_addtocart).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int selectedId = btnradiogroup_size.getCheckedRadioButtonId();
-                size = ((RadioButton)findViewById(selectedId)).getText().toString();
+        if (!sh.getString("userId", "").equals("")) {
+            findViewById(R.id.btn_addtocart).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int selectedId = btnradiogroup_size.getCheckedRadioButtonId();
+                    size = ((RadioButton) findViewById(selectedId)).getText().toString();
 
-                CartArticleDataModel cartarticleDateModel = new CartArticleDataModel(
-                        id,
-                        imagPath,
-                        title,
-                        description,
-                        type,
-                        Float.parseFloat(price),
-                        gender,
-                        size
-                        ,
-                        sh.getString("userId", "")
+                    CartArticleDataModel cartarticleDateModel = new CartArticleDataModel(
+                            id,
+                            imagPath,
+                            title,
+                            description,
+                            type,
+                            Float.parseFloat(price),
+                            gender,
+                            size
+                            ,
+                            sh.getString("userId", "")
 
-                );
-                databaseReferenceCart.child(id).setValue(cartarticleDateModel);
+                    );
+                    databaseReferenceCart.child(id).setValue(cartarticleDateModel);
 
-            }
-        });
+                }
+            });
 
-        findViewById(R.id.btn_addtofav).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CartArticleDataModel favarticleDateModel = new CartArticleDataModel(
-                        id,
-                        imagPath,
-                        title,
-                        description,
-                        type,
-                        Float.parseFloat(price),
-                        gender,
-                        "X",
-                        sh.getString("userId", "")
-                );
-                databaseReferenceFav.child(id).setValue(favarticleDateModel);
-                Toast.makeText(DetailsActivity.this, "Item added to Fav", Toast.LENGTH_LONG).show();
+            findViewById(R.id.btn_addtofav).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CartArticleDataModel favarticleDateModel = new CartArticleDataModel(
+                            id,
+                            imagPath,
+                            title,
+                            description,
+                            type,
+                            Float.parseFloat(price),
+                            gender,
+                            "X",
+                            sh.getString("userId", "")
+                    );
+                    databaseReferenceFav.child(id).setValue(favarticleDateModel);
+                    Toast.makeText(DetailsActivity.this, "Item added to Fav", Toast.LENGTH_LONG).show();
 
-            }
-        });
+                }
+            });
 
-
+        }
     }
 }
