@@ -127,69 +127,82 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelinebottom" />
 
-
-    <TextView
-        android:id="@+id/size_xl"
+    <RadioGroup
+        android:id="@+id/btngrp_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="20dp"
-        android:text="@string/xl"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:layout_marginHorizontal="5dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelinebottom" />
+        app:layout_constraintTop_toTopOf="@+id/guidelinebottom">
 
-    <TextView
-        android:id="@+id/size_l"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="20dp"
-        android:text="@string/l"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@id/size_xl"
-        app:layout_constraintTop_toTopOf="@+id/guidelinebottom" />
+        <RadioButton
+            android:id="@+id/size_xl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_size"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:text="@string/xl"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/size_m"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="20dp"
-        android:text="@string/m"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@id/size_l"
-        app:layout_constraintTop_toTopOf="@+id/guidelinebottom" />
+        <RadioButton
+            android:id="@+id/size_l"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_size"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:text="@string/l"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/size_xl"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/size_s"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="20dp"
-        android:text="@string/s"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        <RadioButton
+            android:id="@+id/size_m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_size"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:text="@string/m"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/size_l"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        app:layout_constraintEnd_toStartOf="@id/size_m"
-        app:layout_constraintTop_toTopOf="@+id/guidelinebottom" />
+        <RadioButton
+            android:id="@+id/size_s"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_size"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:text="@string/s"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/size_m"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/size_xs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="20dp"
-        android:text="@string/xs"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@id/size_s"
-        app:layout_constraintTop_toTopOf="@+id/guidelinebottom" />
+        <RadioButton
+            android:id="@+id/size_xs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_size"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:text="@string/xs"
+            android:checked="true"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/size_s"
+            app:layout_constraintTop_toTopOf="parent" />
 
-
+    </RadioGroup>
     <TextView
         android:id="@+id/tv_description"
         android:layout_width="match_parent"

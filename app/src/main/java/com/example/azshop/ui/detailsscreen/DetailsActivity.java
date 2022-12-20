@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,8 @@ public class DetailsActivity extends AppCompatActivity {
     private String type;
     private String price;
     private String gender;
+    private String size;
+    private RadioGroup btnradiogroup_size;
     private ImageView imgArticle;
     private ImageView imgBack;
     private FirebaseDatabase firebaseDatabase;
@@ -53,6 +57,7 @@ public class DetailsActivity extends AppCompatActivity {
         imgArticle = findViewById(R.id.img_article_details);
         imgBack = findViewById(R.id.btn_back);
         ((TextView) findViewById(R.id.tv_description)).setText(description);
+        btnradiogroup_size = findViewById(R.id.btngrp_size);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +75,9 @@ public class DetailsActivity extends AppCompatActivity {
         findViewById(R.id.btn_addtocart).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int selectedId = btnradiogroup_size.getCheckedRadioButtonId();
+                size = ((RadioButton)findViewById(selectedId)).getText().toString();
+
                 CartArticleDataModel cartarticleDateModel = new CartArticleDataModel(
                         id,
                         imagPath,
@@ -78,7 +86,8 @@ public class DetailsActivity extends AppCompatActivity {
                         type,
                         Float.parseFloat(price),
                         gender,
-                        "X",
+                        size
+                        ,
                         sh.getString("userId", "")
 
                 );
