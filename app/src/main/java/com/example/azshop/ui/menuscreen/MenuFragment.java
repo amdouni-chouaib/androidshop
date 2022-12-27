@@ -42,23 +42,33 @@ public class MenuFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        //calling the methos that we made to affect data to out model then we put it later in the recycle view
         addWomenCatheg();
+        //calling the adapter
         menuAdapter = new MenuAdapter(requireContext(), arrayListmenudata);
+        //setting adapter gender
         menuAdapter.setGender("Woman");
+        //pointing on XML elements
         rv_cclothes = view.findViewById(R.id.rv_clothes);
+        //linking the recycle view to the adapter
         rv_cclothes.setAdapter(menuAdapter);
+        //setting the layout manager
         rv_cclothes.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
         tv_woman = view.findViewById(R.id.tv_woman);
+
         tv_woman.setOnClickListener(new View.OnClickListener() {
             @SuppressLint({"ResourceAsColor", "NotifyDataSetChanged"})
             @Override
             public void onClick(View v) {
+              // setting text color when button clicked
                 tv_woman.setTextColor(getResources().getColor(R.color.black));
                 tv_man.setTextColor(getResources().getColor(R.color.white));
+                //setting gender for the adapter
                 menuAdapter.setGender("Woman");
+                //calling the method if the button clicked so we change the recycle view value
                 addWomenCatheg();
+                //checking if the  adapter has changed the value
                 menuAdapter.notifyDataSetChanged();
             }
         });
@@ -67,24 +77,35 @@ public class MenuFragment extends Fragment {
             @SuppressLint({"ResourceAsColor", "NotifyDataSetChanged"})
             @Override
             public void onClick(View v) {
+                // setting text color when button clicked
+
                 tv_man.setTextColor(getResources().getColor(R.color.black));
                 tv_woman.setTextColor(getResources().getColor(R.color.white));
+                //setting gender for the adapter
+
                 menuAdapter.setGender("Man");
+                //calling the method if the button clicked so we change the recycle view value
                 addManCatheg();
+                //checking if the  adapter has changed the value
+
                 menuAdapter.notifyDataSetChanged();
             }
         });
 
     }
     private void addWomenCatheg(){
+        //clear arraylist
         arrayListmenudata.clear();
+        //adding values to the arraylist for the recycle view later
         arrayListmenudata.add(new MenuDataModel("Clothes", R.drawable.img_cloth));
         arrayListmenudata.add(new MenuDataModel("Shoes", R.drawable.womenshoes));
         arrayListmenudata.add(new MenuDataModel("Bags", R.drawable.bag));
         arrayListmenudata.add(new MenuDataModel("Accessories", R.drawable.accwomen));
     }
     private void addManCatheg(){
+        //clear the arraylist
         arrayListmenudata.clear();
+        //adding values to the arraylist for the recycle view later
         arrayListmenudata.add(new MenuDataModel("Clothes", R.drawable.clothes));
         arrayListmenudata.add(new MenuDataModel("Shoes", R.drawable.shoesman));
         arrayListmenudata.add(new MenuDataModel("Accessories", R.drawable.accman));

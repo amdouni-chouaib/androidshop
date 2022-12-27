@@ -33,7 +33,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class SellActivity extends AppCompatActivity {
-
+//declaring attibutes
     private ArticleDataModel articleDataModel;
     private EditText ettitle;
     private EditText etdescription;
@@ -60,6 +60,7 @@ public class SellActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell);
+        //getting access to the XML Values
         ettitle = findViewById(R.id.et_title);
         etdescription = findViewById(R.id.et_description);
         etprice = findViewById(R.id.et_price);
@@ -70,22 +71,29 @@ public class SellActivity extends AppCompatActivity {
             btnCancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    // all inputs get empty again when we click cancel
                     ettitle.setText("");
                     etprice.setText("");
                     etdescription.setText("");
                     imgItem.setImageURI(Uri.parse(""));
                 }
             });
+            //adding values to array list for the spinner later
         itemsList.add("Clothes");
         itemsList.add("Shoes");
         itemsList.add("Bags");
         itemsList.add("Accessories");
+        //calling the adapter of the pinner the we give it the arraylist as a value
         spinnertypeAdapter = new SpinnerAdapter(this, itemsList);
+        //getting access to the XML element
         spinnertype = findViewById(R.id.spinnerTypeProduct);
+        //setting the adapter to the spinner
         spinnertype.setAdapter(spinnertypeAdapter);
+
         spinnertype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 type = spinnertypeAdapter.getItem(position).toString();
             }
 
@@ -93,12 +101,16 @@ public class SellActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
+            //adding gender value into the arraylist
         itemsGender.add("Woman");
         itemsGender.add("Man");
+        //calling the spinner gender adapter
         spinnergenderAdapter = new SpinnerAdapter(this, itemsGender);
+        //getting xml element access
         spinnergender = findViewById(R.id.spinnergender);
+        //linking adapter to the spinner
         spinnergender.setAdapter(spinnergenderAdapter);
+
         spinnergender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -110,7 +122,7 @@ public class SellActivity extends AppCompatActivity {
 
             }
         });
-
+        //getting realtime database reference
         firebaseDatabase = FirebaseDatabase.getInstance();
         // on below line creating our database reference.
         databaseReference = firebaseDatabase.getReference("Azshop").child("clothes");
@@ -120,6 +132,7 @@ public class SellActivity extends AppCompatActivity {
         imgItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //if we click the pickture he will give you the right to make a picture then crop it if u want
                 ImagePicker.with(SellActivity.this)
                         .crop().start();
             }
@@ -128,13 +141,16 @@ public class SellActivity extends AppCompatActivity {
             btnConfirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                        //getting key for the inserted element in the database
                     String id = databaseReference.push().getKey();
+                    //getting the file path in the Firebase Storage
                     StorageReference filepath = mStorage.child("Blog_Images").child(mImageUri.getLastPathSegment());
+
                     filepath.putFile(mImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                             if (!task.isSuccessful()) {
+                                //if there is a problem with the picture path in the firebase storage it will throw exception
                                 throw task.getException();
                             }
 
@@ -145,7 +161,9 @@ public class SellActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Uri> task) {
                             if (task.isSuccessful()) {
+                                //getting the result uri witch is picture
                                 Uri downloadUri = task.getResult();
+                                //adding it to our object
                                 articleDataModel = new ArticleDataModel(
                                         id,
                                         downloadUri.toString(),
@@ -157,7 +175,9 @@ public class SellActivity extends AppCompatActivity {
                                         Calendar.getInstance().getTime().toString(),
                                         sh.getString("userId", "")
                                 );
+                                //pushing it to the realtime database
                                 databaseReference.child(id).setValue(articleDataModel);
+                                //displaying toast for success added article
                                 Toast.makeText(SellActivity.this, "Article added successfully ", Toast.LENGTH_LONG).show();
 
 
@@ -174,6 +194,7 @@ public class SellActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ImagePicker.REQUEST_CODE) {
+            //if there is a bidirectional intent then we get the picture uri then we set the picture
             Uri uri = data.getData();
             imgItem.setImageURI(uri);
             mImageUri = uri;

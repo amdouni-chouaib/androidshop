@@ -20,13 +20,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SpalashScreen extends AppCompatActivity {
+    //declaring attricutes
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spalash_screen);
-
+            //getting firebase authentication  instance
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -45,10 +46,13 @@ public class SpalashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 try {
+                    // making a timeout of 2 sec
                     sleep(2000);
                     if (currentUser != null)
+                        //if there is already a signed in user so we go to the home activity
                         startActivity(new Intent(SpalashScreen.this, MainActivity.class));
                     else
+                        //else we go to the welcome activity
                         startActivity(new Intent(SpalashScreen.this, WelcomeScreen.class));
 
 
@@ -65,13 +69,13 @@ public class SpalashScreen extends AppCompatActivity {
         switch (requestCode) {
             case 101:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //granted
+                    //granted permission
 
                   updateUI(mAuth.getCurrentUser());
 
                 } else {
                     Toast.makeText(this, "Deny required permissions will not allow you to display image", Toast.LENGTH_LONG).show();
-                    //not granted
+                    //not granted permission
                 }
                 break;
             default:
@@ -79,19 +83,19 @@ public class SpalashScreen extends AppCompatActivity {
         }
     }
 
-    private boolean checkIfAlreadyhavePermission() {
-        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        int result2 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (result == PackageManager.PERMISSION_GRANTED && result2 == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private void requestForSpecificPermission() {
-        ActivityCompat.requestPermissions(SpalashScreen.this,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,},
-                101);
-    }
+//    private boolean checkIfAlreadyhavePermission() {
+//        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+//        int result2 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//        if (result == PackageManager.PERMISSION_GRANTED && result2 == PackageManager.PERMISSION_GRANTED) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+//
+//    private void requestForSpecificPermission() {
+//        ActivityCompat.requestPermissions(SpalashScreen.this,
+//                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,},
+//                101);
+//    }
 }

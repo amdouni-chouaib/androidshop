@@ -47,36 +47,46 @@ public class ClothesFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        // getting bundle values
         Bundle arguments = getArguments();
         type = arguments.getString("type");
         gender = arguments.getString("gender");
-
+//pointing into XML elements
         rv_clothes = view.findViewById(R.id.rv_clothes);
         tvtype = view.findViewById(R.id.tv_type);
+        //setting values on the XML element
         tvtype.setText(type);
-
+//getting back on the previous activity
         view.findViewById(R.id.img_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getFragmentManager().popBackStack();
             }
         });
-
+//declaring realtimedataase instance
         firebaseDatabase = FirebaseDatabase.getInstance();
+        //declaring the reference
         databaseReference = firebaseDatabase.getReference("Azshop").child("clothes");
+        //checking the gender male or female
         Query query = databaseReference.orderByChild("gender").equalTo(gender);
-
+        //event listener
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                //clearing the arraylist
                 articleDataModel.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    //looping the data in the realtime database then putting it to our object
                     ArticleDataModel articleDataModelitem = postSnapshot.getValue(ArticleDataModel.class);
+                    // checking the type then we add it to the list if true
                     if(articleDataModelitem.type.equals(type))
+
                          articleDataModel.add(articleDataModelitem);
                 }
+
                 if (articleDataModel.size() != 0) {
+                    // if the list contains data then we call the adapter link it with
+                    // the recycle view then set the layout display
                     ClotheAdapter wishListAdapter = new ClotheAdapter(getContext(),articleDataModel);
                     rv_clothes.setAdapter(wishListAdapter);
                     rv_clothes.setLayoutManager(new LinearLayoutManager(getActivity(),  LinearLayoutManager.VERTICAL, false));

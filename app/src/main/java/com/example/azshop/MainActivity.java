@@ -22,10 +22,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+            //getting access for XML element
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
+            // setting Home fragment as a default
         setCurrentFragment(new HomeFragment(), MainActivity.this, R.id.flFragment);
+        //check if the items clicked if what depend on  the XML ID  then we set his fragment
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

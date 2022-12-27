@@ -23,6 +23,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class UserProfileActivity extends AppCompatActivity {
+    //declaring our attricutes  so we can get acceess to the schema
+
     private Button btnadarticle;
     private Button btnlogout;
     private Button btneditprofile;
@@ -46,7 +48,7 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_user_profile);
-
+//getting access to values in the inputs
         etemail = findViewById(R.id.et_mail);
 
         etfname = findViewById(R.id.et_fName);
@@ -54,20 +56,27 @@ public class UserProfileActivity extends AppCompatActivity {
         etlname = findViewById(R.id.et_lName);
 
         etphone = findViewById(R.id.et_phone);
-
+//declaring firebase authentication instance
         mAuth = FirebaseAuth.getInstance();
+        //decalring real time database instance
         firebaseDatabase = FirebaseDatabase.getInstance();
+        //referencing the path to save data into
         databaseReference = firebaseDatabase.getReference("Azshop").child("user");
-        SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
-        Query query = databaseReference.orderByChild("id").equalTo(sh.getString("userId", ""));
+        // declaring our sharedpreferences to store some data presistently
 
+        SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        // checking if te id of the user is equal so we can get the information
+        Query query = databaseReference.orderByChild("id").equalTo(sh.getString("userId", ""));
+    //event listener  for getting the informations
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    //looping the realtime database  the getting the values
                     userModellist = postSnapshot.getValue(userModel.class);
                     if (userModellist != null) {
+                        //if there is values then we will change inputes content
                         etemail.setText(userModellist.email);
                         etfname.setText(userModellist.fname);
                         etlname.setText(userModellist.lname);
@@ -85,6 +94,7 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
         btnadarticle = findViewById(R.id.btn_addarticle);
+        //starting activity sell if we click the button
         btnadarticle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +103,8 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
         btnlogout = findViewById(R.id.btn_logout);
+        //starting activity welcome if we click the button and we logout
+
         btnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,13 +115,17 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
         btneditprofile = findViewById(R.id.btn_edit_profile);
+        //updating values in the database if we click on the button
+
         btneditprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //getting input values into string
                 email = etemail.getText().toString();
                 fname = etfname.getText().toString();
                 lname = etlname.getText().toString();
                 phone = etphone.getText().toString();
+                //adding values to our object
                 userModel userModel = new userModel(
                         sh.getString("userId", ""),
                         fname,
@@ -118,7 +134,9 @@ public class UserProfileActivity extends AppCompatActivity {
                         phone
 
                 );
+                //updating values in the real time database
                 databaseReference.child(sh.getString("userId", "")).setValue(userModel);
+                //suuceess toast will appear
                 Toast.makeText(UserProfileActivity.this, "Success Update User",
                         Toast.LENGTH_SHORT).show();
 
@@ -126,6 +144,7 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.img_back).setOnClickListener(new View.OnClickListener() {
+            //getting back to the previous activity
             @Override
             public void onClick(View v) {
                 onBackPressed();

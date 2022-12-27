@@ -51,18 +51,22 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        //getting access to the XML element
         grItems = view.findViewById(R.id.idGVcourses);
-
+        //declating Realtime database instance
         firebaseDatabase = FirebaseDatabase.getInstance();
         // on below line creating our database reference.
         databaseReference = firebaseDatabase.getReference("Azshop").child("clothes");
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                //getting realtime database values
                 ArticleDataModel articleDataModelitem = snapshot.getValue(ArticleDataModel.class);
+                //adding the values into arraylist
                 articleDataModel.add(articleDataModelitem);
+                //making instance of the adapter
                 homeClothesAdapter = new HomeClothesAdapter(requireContext(), articleDataModel);
+                //linking the adapter to the GridView
                 grItems.setAdapter(homeClothesAdapter);
             }
 
@@ -91,6 +95,8 @@ public class HomeFragment extends Fragment {
         imgUser = view.findViewById(R.id.img_user);
         SharedPreferences sh =  this.getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
         if (sh.getString("userId", "").equals("")) {
+           //if the ID of the user is equals to the logged in user then
+            //he will navigate to the welcome activity
             imgUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -98,6 +104,7 @@ public class HomeFragment extends Fragment {
                 }
             });
         } else
+            //else he will navigate to the user profile activity
             imgUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

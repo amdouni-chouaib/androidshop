@@ -25,8 +25,9 @@ import com.example.azshop.ui.sellscreen.SellActivity;
 import java.util.ArrayList;
 
 public class HomeClothesAdapter extends ArrayAdapter<ArticleDataModel> {
+    //decalring attricbutes
     private Context context;
-
+//constructor of the adapter
     public HomeClothesAdapter(@NonNull Context context, ArrayList<ArticleDataModel> courseModelArrayList) {
         super(context, 0, courseModelArrayList);
         this.context = context;
@@ -35,6 +36,7 @@ public class HomeClothesAdapter extends ArrayAdapter<ArticleDataModel> {
     @SuppressLint("SetTextI18n")
     @NonNull
     @Override
+
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listitemView = convertView;
         if (listitemView == null) {
@@ -43,10 +45,12 @@ public class HomeClothesAdapter extends ArrayAdapter<ArticleDataModel> {
         }
 
         ArticleDataModel articleDataModel = getItem(position);
+        //getting access into XML elements
         TextView articlename = listitemView.findViewById(R.id.tv_item_name);
         TextView articleprice = listitemView.findViewById(R.id.tv_item_price);
         ImageView imgArticle = listitemView.findViewById(R.id.img_article);
         if (articleDataModel != null) {
+            //if the model contains data then we will set the XML elements values
             articlename.setText(articleDataModel.getTitle());
             articleprice.setText(articleDataModel.getPrice().toString() + "$");
             Glide.with(context).load(articleDataModel.getImagPath()).into(imgArticle);
@@ -54,6 +58,7 @@ public class HomeClothesAdapter extends ArrayAdapter<ArticleDataModel> {
         listitemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // starting activity and sending the article information after clicking on the article
                 Intent intent = new Intent(context, DetailsActivity.class);
                 intent.putExtra("id",  articleDataModel.id);
                 intent.putExtra("title",  articleDataModel.title);

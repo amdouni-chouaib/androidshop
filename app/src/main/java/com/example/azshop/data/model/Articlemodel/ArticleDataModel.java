@@ -1,6 +1,6 @@
 package com.example.azshop.data.model.Articlemodel;
-
 public class ArticleDataModel {
+    //declaring attributes
     public String id;
     public String imagPath;
     public String title;
@@ -11,7 +11,7 @@ public class ArticleDataModel {
     public String date;
     public String userId;
 
-
+//making our constructor for later use
     public ArticleDataModel() {
     }
 
@@ -36,7 +36,7 @@ public class ArticleDataModel {
 
 
     }
-
+//making getter and setter for our metthods for later use
     public String getId() {
         return id;
     }

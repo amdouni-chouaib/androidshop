@@ -13,15 +13,16 @@ import com.bumptech.glide.Glide;
 import com.example.azshop.R;
 import com.example.azshop.data.model.Articlemodel.ArticleDataModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClotheAdapter extends RecyclerView.Adapter<ClotheAdapter.ViewHolder> {
 
-    private List<ArticleDataModel> data;
+    private ArrayList<ArticleDataModel> data = new ArrayList<ArticleDataModel>();
     private Context context;
 
     // data is passed into the constructor
-    public ClotheAdapter(Context context, List<ArticleDataModel> data) {
+    public ClotheAdapter(Context context, ArrayList<ArticleDataModel> data) {
         super();
         this.data = data;
         this.context = context;

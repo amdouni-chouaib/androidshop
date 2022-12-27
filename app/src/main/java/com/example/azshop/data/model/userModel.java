@@ -1,12 +1,14 @@
 package com.example.azshop.data.model;
 
 public class userModel {
+    //declaring our attricutes
+
     public String id;
     public String fname;
     public String lname;
     public String email;
     public String phone;
-
+//declaring our constructor for later use
     public userModel() {
     }
 
@@ -17,7 +19,7 @@ public class userModel {
         this.email = email;
         this.phone = phone;
     }
-
+//declaring getter and setters for later use
     public String getId() {
         return id;
     }

@@ -1,6 +1,7 @@
 package com.example.azshop.data.model;
 
 public class CartArticleDataModel {
+    //declaring our attributes
     public String id;
     public String imagPath;
     public String title;
@@ -10,7 +11,7 @@ public class CartArticleDataModel {
     public String gender;
     public String size;
     public String userId;
-
+    //decalring out constructer for later use
     public CartArticleDataModel() {
     }
 
@@ -25,7 +26,7 @@ public class CartArticleDataModel {
         this.size = size;
         this.userId = userId;
     }
-
+        //declaring out getter and setters  for later use
     public String getSize() {
         return size;
     }
